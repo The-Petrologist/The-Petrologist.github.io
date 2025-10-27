@@ -1,60 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Petrologist | Joshual V J</title>
-  <style>
-    /* Lava background effect */
-    body {
-      margin: 0;
-      overflow: hidden;
-      height: 100vh;
-      background: linear-gradient(270deg, #ff6a00, #ff0000, #660000);
-      background-size: 600% 600%;
-      animation: lava 10s ease infinite;
-      color: white;
-      font-family: 'Segoe UI', sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      text-align: center;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Petrologist | Joshual V J</title>
+    <style>
+        /* Base Setup */
+        body {
+            margin: 0;
+            overflow: hidden;
+            height: 100vh;
+            font-family: 'Montserrat', sans-serif; /* Elegant font */
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            /* Dark, obsidian base background */
+            background-color: #1a1a1a; 
+            position: relative;
+            z-index: 1; /* Ensure content is above background */
+        }
 
-    @keyframes lava {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+        /* --- Lava/Magma Background Effect --- */
+        /* Container for the blobs */
+        .lava-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            filter: blur(50px); /* Blur the blobs to look like liquid/glow */
+            z-index: 0;
+            overflow: hidden;
+        }
 
-    h1 {
-      font-size: 3rem;
-      text-shadow: 2px 2px 8px #000;
-    }
-    p {
-      font-size: 1.2rem;
-      width: 60%;
-    }
-    a {
-      color: #fff;
-      text-decoration: none;
-      border: 1px solid #fff;
-      padding: 10px 20px;
-      border-radius: 8px;
-      margin-top: 20px;
-      display: inline-block;
-      transition: 0.3s;
-    }
-    a:hover {
-      background: white;
-      color: #ff3300;
-    }
-  </style>
-</head>
+        /* Generic Blob Style */
+        .blob {
+            position: absolute;
+            background: linear-gradient(135deg, #ff4500, #ff8c00); /* Deep orange/red gradient */
+            border-radius: 50%; /* Make them round */
+            animation: flow 20s infinite ease-in-out alternate;
+            opacity: 0.7;
+        }
+
+        /* Individual Blob Styling and Placement */
+        .blob:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: -10%;
+            left: -10%;
+            animation-duration: 18s;
+            box-shadow: 0 0 100px #ff3300; /* Intense inner glow */
+        }
+        .blob:nth-child(2) {
+            width: 450px;
+            height: 450px;
+            bottom: -20%;
+            right: -15%;
+            animation-duration: 25s;
+            box-shadow: 0 0 150px #ff4500;
+        }
+        .blob:nth-child(3) {
+            width: 200px;
+            height: 200px;
+            top: 50%;
+            left: 20%;
+            animation-duration: 15s;
+            box-shadow: 0 0 80px #ff6600;
+        }
+        .blob:nth-child(4) {
+            width: 500px;
+            height: 500px;
+            bottom: -5%;
+            left: 10%;
+            animation-duration: 30s;
+            box-shadow: 0 0 200px #ff8c00;
+        }
+
+        /* Animation Keyframes for Movement */
+        @keyframes flow {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(150px, 100px) scale(1.1); }
+        }
+
+        /* --- Elegant Interface Styling --- */
+        .content-box {
+            background: rgba(0, 0, 0, 0.4); /* Semi-transparent, dark overlay */
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle white border */
+            backdrop-filter: blur(10px); /* Key for elegance: frosted glass effect */
+            padding: 40px 60px;
+            border-radius: 15px;
+            max-width: 80%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Lifted shadow */
+            z-index: 2; /* Keep content clearly on top */
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px #ff6a00; /* Subtle orange glow for the text */
+            font-weight: 700;
+        }
+
+        h1 .volcano {
+            display: inline-block;
+            animation: pulse 2s infinite alternate; /* Make the volcano icon pulse */
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); color: #ff6a00; }
+            100% { transform: scale(1.05); color: #ff8c00; }
+        }
+
+        p {
+            font-size: 1.1rem;
+            width: 100%;
+            max-width: 500px;
+            margin: 20px auto 30px auto;
+            line-height: 1.6;
+            color: #ccc;
+        }
+        
+        b {
+            color: #ffaa00; /* Highlight the name */
+            font-weight: 600;
+        }
+
+        a {
+            color: #ffffff;
+            text-decoration: none;
+            border: 2px solid #ff6a00; /* Orange border */
+            padding: 12px 25px;
+            border-radius: 50px; /* Pill-shaped button */
+            margin-top: 20px;
+            display: inline-block;
+            transition: 0.3s ease-in-out;
+            background: linear-gradient(45deg, #ff4500, #ff8c00); /* Gradient fill */
+            box-shadow: 0 5px 15px rgba(255, 69, 0, 0.4);
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        a:hover {
+            background: linear-gradient(45deg, #ff8c00, #ff4500); /* Reverse gradient on hover */
+            transform: translateY(-3px) scale(1.05); /* Slight lift and scale */
+            box-shadow: 0 8px 20px rgba(255, 69, 0, 0.6);
+            border-color: #ff8c00;
+        }
+    </style>
+    </head>
 <body>
-  <h1>🌋 The Petrologist</h1>
-  <p>Exploring Earth, one rock at a time — geology notes, research, and projects by <b>Joshual V J</b>.</p>
-  <a href="#research">View My Work</a>
+    <div class="lava-container">
+        <div class="blob"></div>
+        <div class="blob"></div>
+        <div class="blob"></div>
+        <div class="blob"></div>
+    </div>
+
+    <div class="content-box">
+        <h1><span class="volcano">🌋</span> The Petrologist</h1>
+        <p>Exploring Earth, one rock at a time — geology notes, research, and projects by <b>Joshual V J</b>.</p>
+        <a href="#research">View My Work</a>
+    </div>
 </body>
 </html>
