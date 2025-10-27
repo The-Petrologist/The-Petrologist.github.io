@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Petrologist | Joshual V J</title>
     <style>
+        /* --- DESIGN VARIABLES --- */
         :root {
-            --color-primary: #ff4500; /* Lava Orange */
-            --color-secondary: #ff8c00; /* Deep Orange */
-            --color-dark: #0a0a0a; /* Obsidian Black */
-            --color-light: #ffffff;
-            --color-glass: rgba(255, 255, 255, 0.08); /* Frosted Glass Base */
+            /* Palette inspired by polarized light colors (Blues, Pinks, Greens) */
+            --color-primary: #00bcd4; /* Cyan/Turquoise (High contrast mineral color) */
+            --color-secondary: #ff4081; /* Pink/Magenta (Birefringence color) */
+            --color-dark: #121212; /* Very dark background for contrast */
+            --color-light: #f0f0f0; 
+            --color-background-structure: rgba(18, 18, 18, 0.85); /* Structured dark container */
         }
 
         /* --- GLOBAL & BASE STYLES --- */
@@ -28,48 +30,84 @@
             min-height: 100vh;
         }
 
-        /* The overall content area (not the background) */
+        /* --- THIN SECTION BACKGROUND (THEME CHANGE) --- */
+        .thin-section-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0; 
+            
+            /* Background effect: Mimics a complex, tessellated mineral texture */
+            /* Using a combination of gradients to create an angular, colorful pattern */
+            background-image: 
+                linear-gradient(135deg, rgba(0, 188, 212, 0.1) 25%, transparent 25%),
+                linear-gradient(225deg, rgba(255, 64, 129, 0.1) 25%, transparent 25%),
+                linear-gradient(45deg, rgba(0, 188, 212, 0.1) 25%, transparent 25%),
+                linear-gradient(315deg, rgba(255, 64, 129, 0.1) 25%, var(--color-dark) 25%);
+            background-size: 50px 50px; /* Controls the size of the "mineral grains" */
+            opacity: 0.6; /* Keeps the effect subtle */
+            animation: texture-shift 120s linear infinite; /* Slow, barely noticeable drift */
+        }
+        
+        @keyframes texture-shift {
+            from { background-position: 0 0; }
+            to { background-position: 100px 100px; }
+        }
+
+        /* --- CONTENT STRUCTURE (Maintaining VirtualFieldGeology layout) --- */
         main {
             position: relative;
-            z-index: 10; /* Ensure content stays on top of the background */
-            padding-top: 80px; /* Space for fixed header */
+            z-index: 10;
+            padding-top: 80px; 
+        }
+        
+        .content-wrapper {
+            max-width: 1400px; 
+            margin: 0 auto;
+            background: var(--color-background-structure); /* Dark structural overlay */
+            min-height: calc(100vh - 80px); 
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
         }
 
         section {
-            padding: 60px 5% 80px;
-            max-width: 1200px;
-            margin: 0 auto;
+            padding: 50px 8%; 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        /* --- NAVIGATION (CLEAN DESIGN) --- */
+        /* --- NAVIGATION (CLEAN & FIXED) --- */
         .header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(0, 0, 0, 0.7); /* Dark, semi-transparent background */
-            backdrop-filter: blur(15px); /* Elegant frosted glass effect */
+            background: var(--color-dark); 
             z-index: 100;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 5%;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            padding: 15px 8%;
+            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.7);
         }
 
         .logo a {
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--color-primary);
+            color: var(--color-primary); /* New mineral color accent */
             text-decoration: none;
             letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         .nav-menu a {
             color: var(--color-light);
             text-decoration: none;
-            margin-left: 30px;
-            font-size: 1rem;
+            margin-left: 35px;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             transition: color 0.3s;
         }
 
@@ -77,140 +115,116 @@
             color: var(--color-primary);
         }
 
-        /* --- HERO SECTION (STRONG VISUAL) --- */
+        /* --- HERO SECTION --- */
         #hero {
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
-            height: 80vh; /* Make it large and impactful */
-            text-align: center;
+            align-items: flex-start; 
+            min-height: 500px;
+            text-align: left;
         }
 
         #hero h1 {
-            font-size: 5rem;
-            margin-bottom: 0.2em;
-            letter-spacing: 3px;
-            text-shadow: 0 0 20px var(--color-primary); /* Intense glow */
-            line-height: 1;
+            font-size: 4rem;
+            margin-bottom: 0.1em;
+            letter-spacing: 2px;
+            color: var(--color-light);
+            text-shadow: 0 0 10px rgba(0, 188, 212, 0.5); /* Primary color glow */
+            line-height: 1.1;
+        }
+
+        #hero h1 span {
+            color: var(--color-secondary); /* Secondary color accent */
         }
 
         #hero p {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: #ccc;
             margin-bottom: 40px;
-            max-width: 600px;
+            max-width: 700px;
         }
         
-        /* The main call-to-action button */
-        .cta-button {
-            background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
-            border: none;
-            color: var(--color-light);
-            padding: 15px 35px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            box-shadow: 0 8px 20px rgba(255, 69, 0, 0.5);
-            transition: all 0.3s ease-in-out;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 25px rgba(255, 69, 0, 0.7);
-        }
-
-        /* --- READABILITY AND VISUAL HIERARCHY --- */
-        .card {
-            background: var(--color-glass); /* Subtle glass background for modules */
-            backdrop-filter: blur(8px);
-            padding: 30px;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            margin-bottom: 40px;
-        }
-
+        /* --- SUBSEQUENT SECTIONS & CARDS --- */
         h2 {
             font-size: 2.5rem;
-            margin-bottom: 30px;
-            color: var(--color-secondary);
-            border-bottom: 2px solid var(--color-primary);
-            padding-bottom: 10px;
+            margin-bottom: 40px;
+            color: var(--color-light);
+            font-weight: 600;
+        }
+
+        h2 span {
+            color: var(--color-primary);
+        }
+        
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.03); 
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 5px solid var(--color-secondary); /* Accent line for structure */
+            transition: background 0.3s;
+        }
+        
+        .card:hover {
+            background: rgba(0, 188, 212, 0.05); /* Highlight on hover */
+        }
+        
+        .card h3 {
+            color: var(--color-primary);
+            margin-bottom: 10px;
+        }
+
+        /* --- CTA BUTTON (Unified Style) --- */
+        .cta-button {
+            background: var(--color-primary);
+            border: none;
+            color: var(--color-dark);
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 188, 212, 0.5);
+            transition: all 0.3s ease-in-out;
             display: inline-block;
         }
 
-        /* --- REAL LAVA FLOW BACKGROUND (ADVANCED CSS) --- */
-        .lava-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 0;
+        .cta-button:hover {
+            background: var(--color-secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 64, 129, 0.7);
         }
-
-        /* The main flow element */
-        .flow {
-            position: absolute;
-            width: 150vw; /* Wider than viewport for smooth scrolling */
-            height: 150vh;
-            top: -25vh;
-            left: -25vw;
-            background: radial-gradient(circle at center, #ff8c00 0%, #ff4500 40%, #8b0000 80%, var(--color-dark) 100%);
-            animation: flow-move 40s linear infinite alternate;
-            filter: blur(150px) contrast(1.5); /* Key for liquid effect */
+        
+        /* Secondary Card Buttons */
+        .card .cta-button {
+            background: none; 
+            color: var(--color-secondary); 
+            border: 1px solid var(--color-secondary); 
+            box-shadow: none;
+            font-weight: 500;
+            padding: 8px 20px;
         }
-
-        /* Secondary glowing veins for depth */
-        .vein {
-            position: absolute;
-            background: #ffaa00;
-            width: 400px;
-            height: 400px;
-            border-radius: 50%;
-            opacity: 0.3;
-            filter: blur(120px);
-            animation: vein-pulse 15s ease-in-out infinite;
-        }
-        .vein:nth-child(2) {
-            top: 10%;
-            left: 5%;
-            animation-duration: 25s;
-        }
-        .vein:nth-child(3) {
-            bottom: 15%;
-            right: 10%;
-            animation-duration: 18s;
-        }
-
-        /* Animation Keyframes */
-        @keyframes flow-move {
-            0% { transform: translate(0, 0) scale(1.0); opacity: 0.8; }
-            50% { transform: translate(-100px, 80px) scale(1.1); opacity: 1; }
-            100% { transform: translate(50px, -50px) scale(1.0); opacity: 0.8; }
-        }
-
-        @keyframes vein-pulse {
-            0% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(20px, 20px) scale(1.1); }
-            100% { transform: translate(0, 0) scale(1); }
+        
+        .card .cta-button:hover {
+            color: var(--color-dark);
+            background: var(--color-secondary);
+            border-color: var(--color-secondary);
         }
 
     </style>
 </head>
 <body>
     
-    <div class="lava-background">
-        <div class="flow"></div>
-        <div class="vein"></div>
-        <div class="vein"></div>
-        <div class="vein"></div>
-    </div>
+    <div class="thin-section-background"></div>
 
     <header class="header">
-        <div class="logo"><a href="#">J V J</a></div>
+        <div class="logo"><a href="#">The Petrologist</a></div>
         <nav class="nav-menu">
             <a href="#hero">Home</a>
             <a href="#research">Research</a>
@@ -221,47 +235,56 @@
     </header>
 
     <main>
-        <section id="hero">
-            <h1>🌋 The Petrologist</h1>
-            <p>Exploring Earth, one rock at a time. Geology notes, cutting-edge research, and projects by **Joshual V J**.</p>
-            <a href="#research" class="cta-button">Dive Into My Research</a>
-        </section>
+        <div class="content-wrapper">
+            
+            <section id="hero">
+                <h1>The <span style="font-weight: 400;">Petrologist</span> 🔬</h1>
+                <p>Exploring Earth, one **thin section** at a time. High-resolution petrography, research, and geological projects by **Joshual V J**.</p>
+                <a href="#research" class="cta-button">View Petrographic Analysis</a>
+            </section>
 
-        <section id="research">
-            <h2>Research & Major Projects</h2>
-            <div class="card">
-                <h3>Petrogenesis of the Deccan Traps Basalts</h3>
-                <p>Detailed analysis of melt inclusion chemistry and fractional crystallization models. </p>
-            </div>
-            <div class="card">
-                <h3>Seismic Tomography of the Upper Mantle</h3>
-                <p>Visualizing anomalous mantle structures beneath volcanic arcs using seismic data.</p>
-            </div>
-        </section>
+            <section id="research">
+                <h2>Research & Major <span>Projects</span></h2>
+                <div class="research-grid">
+                    <div class="card">
+                        <h3>Quantitative Modal Analysis</h3>
+                        <p>Automated quantification of mineral volume percentages using image recognition techniques on polarized micrographs.</p>
+                        <a href="#" class="cta-button" style="margin-top: 15px;">View Paper</a>
+                    </div>
+                    <div class="card">
+                        <h3>Microstructural Evolution of Shear Zones</h3>
+                        <p>Detailed study of crystal preferred orientation (CPO) and dynamic recrystallization textures in mylonites.</p>
+                        <a href="#" class="cta-button" style="margin-top: 15px;">View Project</a>
+                    </div>
+                    <div class="card">
+                        <h3>Mineral Synthesis under High P-T</h3>
+                        <p>Experimental determination of phase equilibria in deep-earth mineral assemblages using diamond anvil cells.</p>
+                        <a href="#" class="cta-button" style="margin-top: 15px;">Details</a>
+                    </div>
+                </div>
+            </section>
 
-        <section id="notes">
-            <h2>Lecture Notes & Articles</h2>
-            <div class="card">
-                <p>A collection of my simplified guides on Igneous, Sedimentary, and Metamorphic Petrology.</p>
-                <a href="#">Read Notes</a>
-            </div>
-        </section>
+            <section id="notes">
+                <h2>Lecture Notes & <span>Articles</span></h2>
+                <div class="card">
+                    <h3>The Principles of Birefringence</h3>
+                    <p>A comprehensive guide to understanding refractive indices, polarization, and interference colors in biaxial minerals.</p>
+                    <a href="#" class="cta-button" style="margin-top: 15px;">Read Notes</a>
+                </div>
+            </section>
 
-        <section id="gallery">
-            <h2>Rock Sample Gallery</h2>
-            <div class="card">
-                <p>A visual collection of high-resolution thin section micrographs and field photography.</p>
-                <a href="#">View Photos</a>
-            </div>
-        </section>
+            <section id="gallery">
+                <h2>Thin Section <span>Gallery</span></h2>
+                <p>A visual collection of high-resolution petrographic images showcasing stunning interference colors and microstructures.</p>
+                <a href="#" class="cta-button" style="margin-top: 15px;">View Gallery</a>
+            </section>
 
-        <section id="contact">
-            <h2>Contact</h2>
-            <div class="card">
-                <p>Reach out to collaborate or discuss geology!</p>
-                <a href="mailto:joshual@example.com" class="cta-button">Email Me</a>
-            </div>
-        </section>
+            <section id="contact">
+                <h2>Get in <span>Touch</span></h2>
+                <p>Reach out to collaborate on a project or discuss the latest petrographic techniques!</p>
+                <a href="mailto:joshual@example.com" class="cta-button" style="margin-top: 15px;">Email Me</a>
+            </section>
+        </div>
     </main>
 </body>
 </html>
