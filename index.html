@@ -7,12 +7,11 @@
     <style>
         /* --- DESIGN VARIABLES --- */
         :root {
-            /* Palette inspired by polarized light colors (Blues, Pinks, Greens) */
-            --color-primary: #00bcd4; /* Cyan/Turquoise (High contrast mineral color) */
-            --color-secondary: #ff4081; /* Pink/Magenta (Birefringence color) */
-            --color-dark: #121212; /* Very dark background for contrast */
+            --color-primary: #ff4500; /* High Contrast Lava Orange */
+            --color-secondary: #ff8c00; /* Deep Amber Glow */
+            --color-dark: #0a0a0a; /* Obsidian Black */
             --color-light: #f0f0f0; 
-            --color-background-structure: rgba(18, 18, 18, 0.85); /* Structured dark container */
+            --color-background-structure: rgba(10, 10, 10, 0.9); /* Very dark structural overlay */
         }
 
         /* --- GLOBAL & BASE STYLES --- */
@@ -30,8 +29,8 @@
             min-height: 100vh;
         }
 
-        /* --- THIN SECTION BACKGROUND (THEME CHANGE) --- */
-        .thin-section-background {
+        /* --- MAGMA TEXTURE BACKGROUND (NEW THEME) --- */
+        .magma-background {
             position: fixed;
             top: 0;
             left: 0;
@@ -40,20 +39,20 @@
             overflow: hidden;
             z-index: 0; 
             
-            /* Background effect: Mimics a complex, tessellated mineral texture */
-            background-image: 
-                linear-gradient(135deg, rgba(0, 188, 212, 0.1) 25%, transparent 25%),
-                linear-gradient(225deg, rgba(255, 64, 129, 0.1) 25%, transparent 25%),
-                linear-gradient(45deg, rgba(0, 188, 212, 0.1) 25%, transparent 25%),
-                linear-gradient(315deg, rgba(255, 64, 129, 0.1) 25%, var(--color-dark) 25%);
-            background-size: 50px 50px; 
-            opacity: 0.6; 
-            animation: texture-shift 120s linear infinite; 
+            /* Background texture mimicking cracked, glowing obsidian */
+            background: 
+                radial-gradient(circle at top left, rgba(255, 69, 0, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at bottom right, rgba(255, 140, 0, 0.15) 0%, transparent 40%),
+                repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.3) 0, rgba(0, 0, 0, 0.3) 1px, transparent 1px, transparent 20px);
+            background-size: 100% 100%, 100% 100%, 50px 50px;
+            
+            /* Subtle animation to suggest heat or internal movement */
+            animation: magma-pulse 30s ease-in-out infinite alternate;
         }
         
-        @keyframes texture-shift {
-            from { background-position: 0 0; }
-            to { background-position: 100px 100px; }
+        @keyframes magma-pulse {
+            0% { opacity: 0.9; }
+            100% { opacity: 1; }
         }
 
         /* --- CONTENT STRUCTURE --- */
@@ -66,7 +65,7 @@
         .content-wrapper {
             max-width: 1400px; 
             margin: 0 auto;
-            background: var(--color-background-structure); 
+            background: var(--color-background-structure); /* High opacity dark structural overlay */
             min-height: calc(100vh - 80px); 
             box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
         }
@@ -129,7 +128,7 @@
             margin-bottom: 0.1em;
             letter-spacing: 2px;
             color: var(--color-light);
-            text-shadow: 0 0 10px rgba(0, 188, 212, 0.5); 
+            text-shadow: 0 0 10px rgba(255, 69, 0, 0.7); /* Red/Orange Glow */
             line-height: 1.1;
         }
         
@@ -148,7 +147,7 @@
         }
         
         .hero-tagline {
-            font-size: 1.1rem !important; /* Override the p style */
+            font-size: 1.1rem !important; 
             color: var(--color-light);
             font-style: italic;
             margin-bottom: 30px !important;
@@ -176,16 +175,16 @@
             background: rgba(255, 255, 255, 0.03); 
             padding: 25px;
             border-radius: 8px;
-            border-left: 5px solid var(--color-secondary); 
+            border-left: 5px solid var(--color-primary); /* Accent line uses the lava color */
             transition: background 0.3s;
         }
         
         .card:hover {
-            background: rgba(0, 188, 212, 0.05); 
+            background: rgba(255, 69, 0, 0.05); /* Orange hover highlight */
         }
         
         .card h3 {
-            color: var(--color-primary);
+            color: var(--color-secondary);
             margin-bottom: 10px;
         }
 
@@ -199,7 +198,7 @@
             text-decoration: none;
             font-weight: 700;
             font-size: 1rem;
-            box-shadow: 0 5px 15px rgba(0, 188, 212, 0.5);
+            box-shadow: 0 5px 15px rgba(255, 69, 0, 0.5);
             transition: all 0.3s ease-in-out;
             display: inline-block;
         }
@@ -207,7 +206,7 @@
         .cta-button:hover {
             background: var(--color-secondary);
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255, 64, 129, 0.7);
+            box-shadow: 0 8px 20px rgba(255, 140, 0, 0.7);
         }
         
         /* Secondary Card Buttons */
@@ -225,18 +224,18 @@
             background: var(--color-secondary);
             border-color: var(--color-secondary);
         }
-
     </style>
 </head>
 <body>
     
-    <div class="thin-section-background"></div>
+    <div class="magma-background"></div>
 
     <header class="header">
         <div class="logo"><a href="#">The Petrologist</a></div>
         <nav class="nav-menu">
             <a href="#hero">Home</a>
-            <a href="#about">About</a> <a href="#research">Research</a>
+            <a href="#Fieldexperience">Field experience</a>
+            <a href="#Internships">Internships</a>
             <a href="#notes">Notes</a>
             <a href="#gallery">Gallery</a>
             <a href="#contact">Contact</a>
@@ -248,17 +247,16 @@
             
             <section id="hero">
                 <h2>Joshual V. J.</h2>
-                <h1 style="color: var(--color-light);">The Petrologist 🔬</h1>
+                <h1 style="color: var(--color-light);">The Petrologist 🔥</h1>
                 <p class="hero-tagline">Earth & Environmental Science student | IISER Bhopal</p>
                 <p>Exploring the hidden stories of rocks, minerals, and the planet beneath us 🌍</p>
                 <a href="#about" class="cta-button">Learn More About Me</a>
             </section>
 
             <section id="about">
-                <h2>Who is <span>Joshual V J</span>?</h2>
                 <div class="card" style="border-left: 5px solid var(--color-primary);">
-                    <p>Welcome to my space on the web! I’m an aspiring geologist currently studying Geology under the department of Earth and Environmental Science at IISER Bhopal. This website is where I share my research notes, course papers, geological observations and Field insights.  .</p>
-                    <p style="margin-top: 15px;">You’ll also find concept notes, resources for geology entrance exams, and glimpses into my projects and fieldwork. My goal is to make Earth science accessible, engaging, and interconnected 🔬🪨🌿</p>
+                    <p>Welcome to my space on the web! I’m an aspiring geologist currently studying Geology under the department of Earth and Environmental Sciences at IISER Bhopal. This website is where I share my research notes, course papers, and geological observations .</p>
+                    <p style="margin-top: 15px;">You’ll also find concept notes, resources for geology entrance exams, and glimpses into my projects and fieldwork. My goal is to make Earth science accessible, engaging, and interconnected 🌋🪨🌿</p>
                 </div>
             </section>
             
@@ -266,18 +264,18 @@
                 <h2>Research & Major <span>Projects</span></h2>
                 <div class="research-grid">
                     <div class="card">
-                        <h3>Quantitative Modal Analysis</h3>
-                        <p>Automated quantification of mineral volume percentages using image recognition techniques on polarized micrographs.</p>
+                        <h3>Petrogenesis of the Deccan Traps</h3>
+                        <p>Analysis of melt inclusion chemistry and fractional crystallization models in continental flood basalts. **(Magmatic Focus)**</p>
                         <a href="#" class="cta-button" style="margin-top: 15px;">View Paper</a>
                     </div>
                     <div class="card">
-                        <h3>Microstructural Evolution of Shear Zones</h3>
-                        <p>Detailed study of crystal preferred orientation (CPO) and dynamic recrystallization textures in mylonites.</p>
+                        <h3>Geothermal Energy Potential</h3>
+                        <p>Modeling thermal gradients and subsurface heat flow in active rift zones. **(Heat & Magma Connection)**</p>
                         <a href="#" class="cta-button" style="margin-top: 15px;">View Project</a>
                     </div>
                     <div class="card">
-                        <h3>Mineral Synthesis under High P-T</h3>
-                        <p>Experimental determination of phase equilibria in deep-earth mineral assemblages using diamond anvil cells.</p>
+                        <h3>Rock Deformation and Failure</h3>
+                        <p>Experimental study of material failure under high temperatures mimicking deep crustal conditions.</p>
                         <a href="#" class="cta-button" style="margin-top: 15px;">Details</a>
                     </div>
                 </div>
@@ -286,21 +284,21 @@
             <section id="notes">
                 <h2>Lecture Notes & <span>Articles</span></h2>
                 <div class="card">
-                    <h3>The Principles of Birefringence</h3>
-                    <p>A comprehensive guide to understanding refractive indices, polarization, and interference colors in biaxial minerals.</p>
+                    <h3>Viscosity and Rheology of Silicate Melts</h3>
+                    <p>Understanding how temperature and composition influence magma flow and eruption dynamics.</p>
                     <a href="#" class="cta-button" style="margin-top: 15px;">Read Notes</a>
                 </div>
             </section>
 
             <section id="gallery">
-                <h2>Thin Section <span>Gallery</span></h2>
-                <p>A visual collection of high-resolution petrographic images showcasing stunning interference colors and microstructures.</p>
+                <h2>Fieldwork & <span>Obsidian Gallery</span></h2>
+                <p>A visual collection of high-resolution volcanic rock samples, including textures of glassy obsidian and basalt.</p>
                 <a href="#" class="cta-button" style="margin-top: 15px;">View Gallery</a>
             </section>
 
             <section id="contact">
                 <h2>Get in <span>Touch</span></h2>
-                <p>Reach out to collaborate on a project or discuss the latest petrographic techniques!</p>
+                <p>Reach out to collaborate on a project or discuss the latest findings in volcanology and petrology!</p>
                 <a href="mailto:joshual@example.com" class="cta-button" style="margin-top: 15px;">Email Me</a>
             </section>
         </div>
