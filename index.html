@@ -5,165 +5,263 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Petrologist | Joshual V J</title>
     <style>
-        /* Base Setup */
-        body {
-            margin: 0;
-            overflow: hidden;
-            height: 100vh;
-            font-family: 'Montserrat', sans-serif; /* Elegant font */
-            color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            text-align: center;
-            /* Dark, obsidian base background */
-            background-color: #1a1a1a; 
-            position: relative;
-            z-index: 1; /* Ensure content is above background */
+        :root {
+            --color-primary: #ff4500; /* Lava Orange */
+            --color-secondary: #ff8c00; /* Deep Orange */
+            --color-dark: #0a0a0a; /* Obsidian Black */
+            --color-light: #ffffff;
+            --color-glass: rgba(255, 255, 255, 0.08); /* Frosted Glass Base */
         }
 
-        /* --- Lava/Magma Background Effect --- */
-        /* Container for the blobs */
-        .lava-container {
-            position: absolute;
+        /* --- GLOBAL & BASE STYLES --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            color: var(--color-light);
+            background-color: var(--color-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* The overall content area (not the background) */
+        main {
+            position: relative;
+            z-index: 10; /* Ensure content stays on top of the background */
+            padding-top: 80px; /* Space for fixed header */
+        }
+
+        section {
+            padding: 60px 5% 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* --- NAVIGATION (CLEAN DESIGN) --- */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7); /* Dark, semi-transparent background */
+            backdrop-filter: blur(15px); /* Elegant frosted glass effect */
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo a {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-menu a {
+            color: var(--color-light);
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: var(--color-primary);
+        }
+
+        /* --- HERO SECTION (STRONG VISUAL) --- */
+        #hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 80vh; /* Make it large and impactful */
+            text-align: center;
+        }
+
+        #hero h1 {
+            font-size: 5rem;
+            margin-bottom: 0.2em;
+            letter-spacing: 3px;
+            text-shadow: 0 0 20px var(--color-primary); /* Intense glow */
+            line-height: 1;
+        }
+
+        #hero p {
+            font-size: 1.5rem;
+            color: #ccc;
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+        
+        /* The main call-to-action button */
+        .cta-button {
+            background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
+            border: none;
+            color: var(--color-light);
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 8px 20px rgba(255, 69, 0, 0.5);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(255, 69, 0, 0.7);
+        }
+
+        /* --- READABILITY AND VISUAL HIERARCHY --- */
+        .card {
+            background: var(--color-glass); /* Subtle glass background for modules */
+            backdrop-filter: blur(8px);
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: var(--color-secondary);
+            border-bottom: 2px solid var(--color-primary);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        /* --- REAL LAVA FLOW BACKGROUND (ADVANCED CSS) --- */
+        .lava-background {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            filter: blur(50px); /* Blur the blobs to look like liquid/glow */
-            z-index: 0;
             overflow: hidden;
+            z-index: 0;
         }
 
-        /* Generic Blob Style */
-        .blob {
+        /* The main flow element */
+        .flow {
             position: absolute;
-            background: linear-gradient(135deg, #ff4500, #ff8c00); /* Deep orange/red gradient */
-            border-radius: 50%; /* Make them round */
-            animation: flow 20s infinite ease-in-out alternate;
-            opacity: 0.7;
+            width: 150vw; /* Wider than viewport for smooth scrolling */
+            height: 150vh;
+            top: -25vh;
+            left: -25vw;
+            background: radial-gradient(circle at center, #ff8c00 0%, #ff4500 40%, #8b0000 80%, var(--color-dark) 100%);
+            animation: flow-move 40s linear infinite alternate;
+            filter: blur(150px) contrast(1.5); /* Key for liquid effect */
         }
 
-        /* Individual Blob Styling and Placement */
-        .blob:nth-child(1) {
-            width: 300px;
-            height: 300px;
-            top: -10%;
-            left: -10%;
-            animation-duration: 18s;
-            box-shadow: 0 0 100px #ff3300; /* Intense inner glow */
+        /* Secondary glowing veins for depth */
+        .vein {
+            position: absolute;
+            background: #ffaa00;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            opacity: 0.3;
+            filter: blur(120px);
+            animation: vein-pulse 15s ease-in-out infinite;
         }
-        .blob:nth-child(2) {
-            width: 450px;
-            height: 450px;
-            bottom: -20%;
-            right: -15%;
+        .vein:nth-child(2) {
+            top: 10%;
+            left: 5%;
             animation-duration: 25s;
-            box-shadow: 0 0 150px #ff4500;
         }
-        .blob:nth-child(3) {
-            width: 200px;
-            height: 200px;
-            top: 50%;
-            left: 20%;
-            animation-duration: 15s;
-            box-shadow: 0 0 80px #ff6600;
-        }
-        .blob:nth-child(4) {
-            width: 500px;
-            height: 500px;
-            bottom: -5%;
-            left: 10%;
-            animation-duration: 30s;
-            box-shadow: 0 0 200px #ff8c00;
+        .vein:nth-child(3) {
+            bottom: 15%;
+            right: 10%;
+            animation-duration: 18s;
         }
 
-        /* Animation Keyframes for Movement */
-        @keyframes flow {
+        /* Animation Keyframes */
+        @keyframes flow-move {
+            0% { transform: translate(0, 0) scale(1.0); opacity: 0.8; }
+            50% { transform: translate(-100px, 80px) scale(1.1); opacity: 1; }
+            100% { transform: translate(50px, -50px) scale(1.0); opacity: 0.8; }
+        }
+
+        @keyframes vein-pulse {
             0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(150px, 100px) scale(1.1); }
+            50% { transform: translate(20px, 20px) scale(1.1); }
+            100% { transform: translate(0, 0) scale(1); }
         }
 
-        /* --- Elegant Interface Styling --- */
-        .content-box {
-            background: rgba(0, 0, 0, 0.4); /* Semi-transparent, dark overlay */
-            border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle white border */
-            backdrop-filter: blur(10px); /* Key for elegance: frosted glass effect */
-            padding: 40px 60px;
-            border-radius: 15px;
-            max-width: 80%;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Lifted shadow */
-            z-index: 2; /* Keep content clearly on top */
-        }
-
-        h1 {
-            font-size: 3.5rem;
-            margin-bottom: 10px;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px #ff6a00; /* Subtle orange glow for the text */
-            font-weight: 700;
-        }
-
-        h1 .volcano {
-            display: inline-block;
-            animation: pulse 2s infinite alternate; /* Make the volcano icon pulse */
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); color: #ff6a00; }
-            100% { transform: scale(1.05); color: #ff8c00; }
-        }
-
-        p {
-            font-size: 1.1rem;
-            width: 100%;
-            max-width: 500px;
-            margin: 20px auto 30px auto;
-            line-height: 1.6;
-            color: #ccc;
-        }
-        
-        b {
-            color: #ffaa00; /* Highlight the name */
-            font-weight: 600;
-        }
-
-        a {
-            color: #ffffff;
-            text-decoration: none;
-            border: 2px solid #ff6a00; /* Orange border */
-            padding: 12px 25px;
-            border-radius: 50px; /* Pill-shaped button */
-            margin-top: 20px;
-            display: inline-block;
-            transition: 0.3s ease-in-out;
-            background: linear-gradient(45deg, #ff4500, #ff8c00); /* Gradient fill */
-            box-shadow: 0 5px 15px rgba(255, 69, 0, 0.4);
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-        
-        a:hover {
-            background: linear-gradient(45deg, #ff8c00, #ff4500); /* Reverse gradient on hover */
-            transform: translateY(-3px) scale(1.05); /* Slight lift and scale */
-            box-shadow: 0 8px 20px rgba(255, 69, 0, 0.6);
-            border-color: #ff8c00;
-        }
     </style>
-    </head>
+</head>
 <body>
-    <div class="lava-container">
-        <div class="blob"></div>
-        <div class="blob"></div>
-        <div class="blob"></div>
-        <div class="blob"></div>
+    
+    <div class="lava-background">
+        <div class="flow"></div>
+        <div class="vein"></div>
+        <div class="vein"></div>
+        <div class="vein"></div>
     </div>
 
-    <div class="content-box">
-        <h1><span class="volcano">🌋</span> The Petrologist</h1>
-        <p>Exploring Earth, one rock at a time — geology notes, research, and projects by <b>Joshual V J</b>.</p>
-        <a href="#research">View My Work</a>
-    </div>
+    <header class="header">
+        <div class="logo"><a href="#">J V J</a></div>
+        <nav class="nav-menu">
+            <a href="#hero">Home</a>
+            <a href="#research">Research</a>
+            <a href="#notes">Notes</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero">
+            <h1>🌋 The Petrologist</h1>
+            <p>Exploring Earth, one rock at a time. Geology notes, cutting-edge research, and projects by **Joshual V J**.</p>
+            <a href="#research" class="cta-button">Dive Into My Research</a>
+        </section>
+
+        <section id="research">
+            <h2>Research & Major Projects</h2>
+            <div class="card">
+                <h3>Petrogenesis of the Deccan Traps Basalts</h3>
+                <p>Detailed analysis of melt inclusion chemistry and fractional crystallization models. </p>
+            </div>
+            <div class="card">
+                <h3>Seismic Tomography of the Upper Mantle</h3>
+                <p>Visualizing anomalous mantle structures beneath volcanic arcs using seismic data.</p>
+            </div>
+        </section>
+
+        <section id="notes">
+            <h2>Lecture Notes & Articles</h2>
+            <div class="card">
+                <p>A collection of my simplified guides on Igneous, Sedimentary, and Metamorphic Petrology.</p>
+                <a href="#">Read Notes</a>
+            </div>
+        </section>
+
+        <section id="gallery">
+            <h2>Rock Sample Gallery</h2>
+            <div class="card">
+                <p>A visual collection of high-resolution thin section micrographs and field photography.</p>
+                <a href="#">View Photos</a>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact</h2>
+            <div class="card">
+                <p>Reach out to collaborate or discuss geology!</p>
+                <a href="mailto:joshual@example.com" class="cta-button">Email Me</a>
+            </div>
+        </section>
+    </main>
 </body>
 </html>
