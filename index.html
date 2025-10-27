@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Petrologist | Joshual V J</title>
+  <style>
+    /* Lava background effect */
+    body {
+      margin: 0;
+      overflow: hidden;
+      height: 100vh;
+      background: linear-gradient(270deg, #ff6a00, #ff0000, #660000);
+      background-size: 600% 600%;
+      animation: lava 10s ease infinite;
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    @keyframes lava {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h1 {
+      font-size: 3rem;
+      text-shadow: 2px 2px 8px #000;
+    }
+    p {
+      font-size: 1.2rem;
+      width: 60%;
+    }
+    a {
+      color: #fff;
+      text-decoration: none;
+      border: 1px solid #fff;
+      padding: 10px 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+      display: inline-block;
+      transition: 0.3s;
+    }
+    a:hover {
+      background: white;
+      color: #ff3300;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌋 The Petrologist</h1>
+  <p>Exploring Earth, one rock at a time — geology notes, research, and projects by <b>Joshual V J</b>.</p>
+  <a href="#research">View My Work</a>
+</body>
+</html>
