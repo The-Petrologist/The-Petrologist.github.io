@@ -74,6 +74,14 @@
             padding: 50px 8%; 
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
+        
+        /* --- CORE CHANGE: HIDE ALL SECTIONS BY DEFAULT --- */
+        /* The #hero section will be the exception and must be visible (it is the 'home' part) */
+        #about, #field-experience, #internships, #notes, #gallery, #contact {
+            display: none; /* Hide content sections initially */
+        }
+        /* The navigation should handle showing them */
+
 
         /* --- NAVIGATION --- */
         .header {
@@ -109,7 +117,7 @@
             transition: color 0.3s;
         }
 
-        .nav-menu a:hover {
+        .nav-menu a:hover, .nav-menu a.active {
             color: var(--color-primary);
         }
 
@@ -237,13 +245,15 @@
     <div class="magma-background"></div>
 
     <header class="header">
-        <div class="logo"><a href="#">The Petrologist</a></div>
+        <div class="logo"><a href="#hero" class="nav-link" data-target="hero">The Petrologist</a></div>
         <nav class="nav-menu">
-            <a href="#hero">Home</a>
-            <a href="#about">About</a>
-            <a href="#field-experience">Field Experience</a> <a href="#internships">Internships</a>           <a href="#notes">Notes</a>
-            <a href="#gallery">Gallery</a>
-            <a href="#contact">Contact</a>
+            <a href="#hero" class="nav-link active" data-target="hero">Home</a>
+            <a href="#about" class="nav-link" data-target="about">About</a>
+            <a href="#field-experience" class="nav-link" data-target="field-experience">Field Experience</a>
+            <a href="#internships" class="nav-link" data-target="internships">Internships</a>
+            <a href="#notes" class="nav-link" data-target="notes">Notes</a>
+            <a href="#gallery" class="nav-link" data-target="gallery">Gallery</a>
+            <a href="#contact" class="nav-link" data-target="contact">Contact</a>
         </nav>
     </header>
 
@@ -255,9 +265,9 @@
                 <h1 style="color: var(--color-light);">The Petrologist 🔥</h1>
                 <p class="hero-tagline">Earth & Environmental Science student | IISER Bhopal</p>
                 <p>Exploring the hidden stories of rocks, minerals, and the planet beneath us 🌍</p>
-                <a href="#about" class="cta-button">Learn More About Me</a>
+                <a href="#about" class="cta-button learn-more-cta">Learn More About Me</a>
             </section>
-
+            
             <section id="about">
                 <h2>Who is <span>Joshual V J</span>?</h2>
                 <div class="card" style="border-left: 5px solid var(--color-primary);">
@@ -318,5 +328,78 @@
             </section>
         </div>
     </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('.nav-menu a, .logo a');
+            const sections = document.querySelectorAll('section');
+            const learnMoreCta = document.querySelector('.learn-more-cta');
+            
+            // Function to hide all non-hero sections
+            const hideAllSections = () => {
+                sections.forEach(section => {
+                    if (section.id !== 'hero') {
+                        section.style.display = 'none';
+                    }
+                });
+            };
+
+            // Function to show a specific section
+            const showSection = (targetId) => {
+                hideAllSections();
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    targetSection.style.display = 'block';
+                    // Scroll to the top of the content wrapper to feel like a new page
+                    document.querySelector('.content-wrapper').scrollIntoView({ behavior: 'smooth' });
+                }
+            };
+
+            // Function to handle the navigation clicks
+            const handleNavClick = (event) => {
+                event.preventDefault(); // Stop the default anchor link behavior
+                
+                const targetId = event.currentTarget.getAttribute('data-target');
+                
+                // Remove 'active' class from all links
+                navLinks.forEach(link => link.classList.remove('active'));
+                
+                // Add 'active' class to the clicked link
+                event.currentTarget.classList.add('active');
+
+                if (targetId === 'hero') {
+                    // Clicking HOME/Logo: Hide all other sections and scroll to top of hero
+                    hideAllSections();
+                    document.getElementById('hero').scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    // Clicking any other link: Show that specific section
+                    showSection(targetId);
+                }
+            };
+
+            // 1. Initial setup: Hide all non-hero sections
+            hideAllSections();
+            
+            // 2. Attach click listeners to all navigation links (including logo)
+            navLinks.forEach(link => {
+                // We use a custom data-target attribute in the HTML for reliable targeting
+                link.addEventListener('click', handleNavClick);
+            });
+
+            // 3. Special handler for the 'Learn More About Me' CTA
+            learnMoreCta.addEventListener('click', (event) => {
+                event.preventDefault(); // Prevent default scroll
+                
+                // Clear active state on all nav links
+                navLinks.forEach(link => link.classList.remove('active'));
+                
+                // Set 'About' link as active
+                document.querySelector('[data-target="about"]').classList.add('active');
+
+                // Show ONLY the 'about' section
+                showSection('about'); 
+            });
+        });
+    </script>
 </body>
 </html>
