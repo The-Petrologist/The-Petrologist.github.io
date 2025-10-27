@@ -29,7 +29,7 @@
             min-height: 100vh;
         }
 
-        /* --- MAGMA TEXTURE BACKGROUND (NEW THEME) --- */
+        /* --- MAGMA TEXTURE BACKGROUND --- */
         .magma-background {
             position: fixed;
             top: 0;
@@ -165,12 +165,12 @@
             color: var(--color-primary);
         }
         
-        .research-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+        .experience-item {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 30px;
         }
-
+        
         .card {
             background: rgba(255, 255, 255, 0.03); 
             padding: 25px;
@@ -185,6 +185,11 @@
         
         .card h3 {
             color: var(--color-secondary);
+            margin-bottom: 10px;
+        }
+        
+        .card p {
+            font-size: 1rem;
             margin-bottom: 10px;
         }
 
@@ -209,7 +214,7 @@
             box-shadow: 0 8px 20px rgba(255, 140, 0, 0.7);
         }
         
-        /* Secondary Card Buttons */
+        /* Secondary Card Buttons for reports */
         .card .cta-button {
             background: none; 
             color: var(--color-secondary); 
@@ -217,6 +222,7 @@
             box-shadow: none;
             font-weight: 500;
             padding: 8px 20px;
+            margin-right: 15px; /* Space out multiple links */
         }
         
         .card .cta-button:hover {
@@ -234,9 +240,8 @@
         <div class="logo"><a href="#">The Petrologist</a></div>
         <nav class="nav-menu">
             <a href="#hero">Home</a>
-            <a href="#Fieldexperience">Field experience</a>
-            <a href="#Internships">Internships</a>
-            <a href="#notes">Notes</a>
+            <a href="#about">About</a>
+            <a href="#field-experience">Field Experience</a> <a href="#internships">Internships</a>           <a href="#notes">Notes</a>
             <a href="#gallery">Gallery</a>
             <a href="#contact">Contact</a>
         </nav>
@@ -254,30 +259,40 @@
             </section>
 
             <section id="about">
+                <h2>Who is <span>Joshual V J</span>?</h2>
                 <div class="card" style="border-left: 5px solid var(--color-primary);">
-                    <p>Welcome to my space on the web! I’m an aspiring geologist currently studying Geology under the department of Earth and Environmental Sciences at IISER Bhopal. This website is where I share my research notes, course papers, and geological observations .</p>
+                    <p>Welcome to my space on the web! I’m an aspiring geologist currently studying Geology under the department of **Earth and Environmental Sciences at IISER Bhopal**. This website is where I share my research notes, course papers, and geological observations.</p>
                     <p style="margin-top: 15px;">You’ll also find concept notes, resources for geology entrance exams, and glimpses into my projects and fieldwork. My goal is to make Earth science accessible, engaging, and interconnected 🌋🪨🌿</p>
                 </div>
             </section>
             
-            <section id="research">
-                <h2>Research & Major <span>Projects</span></h2>
-                <div class="research-grid">
-                    <div class="card">
-                        <h3>Petrogenesis of the Deccan Traps</h3>
-                        <p>Analysis of melt inclusion chemistry and fractional crystallization models in continental flood basalts. **(Magmatic Focus)**</p>
-                        <a href="#" class="cta-button" style="margin-top: 15px;">View Paper</a>
-                    </div>
-                    <div class="card">
-                        <h3>Geothermal Energy Potential</h3>
-                        <p>Modeling thermal gradients and subsurface heat flow in active rift zones. **(Heat & Magma Connection)**</p>
-                        <a href="#" class="cta-button" style="margin-top: 15px;">View Project</a>
-                    </div>
-                    <div class="card">
-                        <h3>Rock Deformation and Failure</h3>
-                        <p>Experimental study of material failure under high temperatures mimicking deep crustal conditions.</p>
-                        <a href="#" class="cta-button" style="margin-top: 15px;">Details</a>
-                    </div>
+            <section id="field-experience">
+                <h2>Academic <span>Field Experience</span></h2>
+                
+                <div class="card">
+                    <h3>3rd Year Field Trip - Regional Geology</h3>
+                    <p>Conducted geological mapping and sampling as part of the academic curriculum. Gained practical experience in identifying lithological units, structural mapping, and preparing detailed field reports. Focus included **sedimentary sequences, metamorphic grade variations, and local economic geology.**</p>
+                    
+                    <p style="margin-top: 20px;">**Location:** *[Insert Field Trip Location/Region Here]*</p>
+                    <p>**Duration:** *[Insert Dates/Duration Here]*</p>
+                    
+                    <a href="#" class="cta-button" style="margin-top: 15px;">View Field Report (PDF)</a>
+                </div>
+            </section>
+
+            <section id="internships">
+                <h2>Professional <span>Internships</span></h2>
+                
+                <div class="card">
+                    <h3>Wadia Institute of Himalayan Geology (WIHG)</h3>
+                    <p>**Project:** *[Insert Your Project Title Here]*</p>
+                    <p>Worked under the guidance of **Dr. Barun Kumar Mukherjee**. Focused on advanced analytical techniques and data interpretation related to **Himalayan tectonics and petrology/mineralogy**. The experience provided hands-on exposure to professional geological research protocols.</p>
+                    
+                    <p style="margin-top: 20px;">**Supervisor:** Dr. Barun Kumar Mukherjee</p>
+                    <p>**Institution:** Wadia Institute of Himalayan Geology (WIHG), Dehradun</p>
+                    <p>**Duration:** *[Insert Internship Dates/Duration Here]*</p>
+                    
+                    <a href="#" class="cta-button" style="margin-top: 15px;">View Internship Report (PDF)</a>
                 </div>
             </section>
 
@@ -285,14 +300,14 @@
                 <h2>Lecture Notes & <span>Articles</span></h2>
                 <div class="card">
                     <h3>Viscosity and Rheology of Silicate Melts</h3>
-                    <p>Understanding how temperature and composition influence magma flow and eruption dynamics.</p>
+                    <p>Understanding how temperature and composition influence magma flow and eruption dynamics. *(Content to be updated)*</p>
                     <a href="#" class="cta-button" style="margin-top: 15px;">Read Notes</a>
                 </div>
             </section>
 
             <section id="gallery">
                 <h2>Fieldwork & <span>Obsidian Gallery</span></h2>
-                <p>A visual collection of high-resolution volcanic rock samples, including textures of glassy obsidian and basalt.</p>
+                <p>A visual collection of high-resolution volcanic rock samples, including textures of glassy obsidian and basalt. *(Content to be updated)*</p>
                 <a href="#" class="cta-button" style="margin-top: 15px;">View Gallery</a>
             </section>
 
