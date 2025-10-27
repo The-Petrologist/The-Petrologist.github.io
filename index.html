@@ -41,15 +41,14 @@
             z-index: 0; 
             
             /* Background effect: Mimics a complex, tessellated mineral texture */
-            /* Using a combination of gradients to create an angular, colorful pattern */
             background-image: 
                 linear-gradient(135deg, rgba(0, 188, 212, 0.1) 25%, transparent 25%),
                 linear-gradient(225deg, rgba(255, 64, 129, 0.1) 25%, transparent 25%),
                 linear-gradient(45deg, rgba(0, 188, 212, 0.1) 25%, transparent 25%),
                 linear-gradient(315deg, rgba(255, 64, 129, 0.1) 25%, var(--color-dark) 25%);
-            background-size: 50px 50px; /* Controls the size of the "mineral grains" */
-            opacity: 0.6; /* Keeps the effect subtle */
-            animation: texture-shift 120s linear infinite; /* Slow, barely noticeable drift */
+            background-size: 50px 50px; 
+            opacity: 0.6; 
+            animation: texture-shift 120s linear infinite; 
         }
         
         @keyframes texture-shift {
@@ -57,7 +56,7 @@
             to { background-position: 100px 100px; }
         }
 
-        /* --- CONTENT STRUCTURE (Maintaining VirtualFieldGeology layout) --- */
+        /* --- CONTENT STRUCTURE --- */
         main {
             position: relative;
             z-index: 10;
@@ -67,7 +66,7 @@
         .content-wrapper {
             max-width: 1400px; 
             margin: 0 auto;
-            background: var(--color-background-structure); /* Dark structural overlay */
+            background: var(--color-background-structure); 
             min-height: calc(100vh - 80px); 
             box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
         }
@@ -77,7 +76,7 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        /* --- NAVIGATION (CLEAN & FIXED) --- */
+        /* --- NAVIGATION --- */
         .header {
             position: fixed;
             top: 0;
@@ -95,7 +94,7 @@
         .logo a {
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--color-primary); /* New mineral color accent */
+            color: var(--color-primary); 
             text-decoration: none;
             letter-spacing: 1px;
             text-transform: uppercase;
@@ -130,12 +129,15 @@
             margin-bottom: 0.1em;
             letter-spacing: 2px;
             color: var(--color-light);
-            text-shadow: 0 0 10px rgba(0, 188, 212, 0.5); /* Primary color glow */
+            text-shadow: 0 0 10px rgba(0, 188, 212, 0.5); 
             line-height: 1.1;
         }
-
-        #hero h1 span {
-            color: var(--color-secondary); /* Secondary color accent */
+        
+        #hero h2 {
+             font-size: 1.5rem;
+             color: var(--color-secondary);
+             font-weight: 400;
+             margin-bottom: 5px;
         }
 
         #hero p {
@@ -143,6 +145,13 @@
             color: #ccc;
             margin-bottom: 40px;
             max-width: 700px;
+        }
+        
+        .hero-tagline {
+            font-size: 1.1rem !important; /* Override the p style */
+            color: var(--color-light);
+            font-style: italic;
+            margin-bottom: 30px !important;
         }
         
         /* --- SUBSEQUENT SECTIONS & CARDS --- */
@@ -167,12 +176,12 @@
             background: rgba(255, 255, 255, 0.03); 
             padding: 25px;
             border-radius: 8px;
-            border-left: 5px solid var(--color-secondary); /* Accent line for structure */
+            border-left: 5px solid var(--color-secondary); 
             transition: background 0.3s;
         }
         
         .card:hover {
-            background: rgba(0, 188, 212, 0.05); /* Highlight on hover */
+            background: rgba(0, 188, 212, 0.05); 
         }
         
         .card h3 {
@@ -227,7 +236,7 @@
         <div class="logo"><a href="#">The Petrologist</a></div>
         <nav class="nav-menu">
             <a href="#hero">Home</a>
-            <a href="#research">Research</a>
+            <a href="#about">About</a> <a href="#research">Research</a>
             <a href="#notes">Notes</a>
             <a href="#gallery">Gallery</a>
             <a href="#contact">Contact</a>
@@ -238,11 +247,21 @@
         <div class="content-wrapper">
             
             <section id="hero">
-                <h1>The <span style="font-weight: 400;">Petrologist</span> 🔬</h1>
-                <p>Exploring Earth, one **thin section** at a time. High-resolution petrography, research, and geological projects by **Joshual V J**.</p>
-                <a href="#research" class="cta-button">View Petrographic Analysis</a>
+                <h2>Joshual V. J.</h2>
+                <h1 style="color: var(--color-light);">The Petrologist 🔬</h1>
+                <p class="hero-tagline">Earth & Environmental Science student | IISER Bhopal</p>
+                <p>Exploring the hidden stories of rocks, minerals, and the planet beneath us 🌍</p>
+                <a href="#about" class="cta-button">Learn More About Me</a>
             </section>
 
+            <section id="about">
+                <h2>Who is <span>Joshual V J</span>?</h2>
+                <div class="card" style="border-left: 5px solid var(--color-primary);">
+                    <p>Welcome to my space on the web! I’m an aspiring geologist currently studying **Earth and Environmental Sciences at IISER Bhopal**. This website is where I share my research notes, course papers, and geological observations — from mineralogy and seismology to environmental studies.</p>
+                    <p style="margin-top: 15px;">You’ll also find concept notes, resources for geology entrance exams, and glimpses into my projects and fieldwork. My goal is to make Earth science accessible, engaging, and interconnected 🔬🪨🌿</p>
+                </div>
+            </section>
+            
             <section id="research">
                 <h2>Research & Major <span>Projects</span></h2>
                 <div class="research-grid">
