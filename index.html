@@ -396,7 +396,7 @@
                 <h3 style="text-align:center;">3rd Year Field Trip – Regional Geology</h3>
 
                 <p style="text-align:center; max-width:800px; margin:0 auto; padding:10px;">
-                  Conducted a comprehensive geological field trip across parts of <strong>Madhya Pradesh</strong>, exploring diverse lithologies including
+                  As part of the 3rd year Curriculum at IISER Bhopal, we Conducted a comprehensive geological field trip across parts of <strong>Madhya Pradesh</strong>, exploring diverse lithologies including
                   <strong>Deccan Traps</strong> and <strong>Vindhyan Sandstones</strong>. The fieldwork provided hands-on experience in using
                   instruments such as the <em>clinometer</em> and <em>Brunton compass</em>, as well as in <em>stereonet projection</em> for structural data analysis.
                   Observed and documented features like <strong>spheroidal weathering, quartz veins, dikes at Potla, conglomerates, and river terraces</strong>.
@@ -500,7 +500,7 @@
 
                 <div class="pdf-card" onclick="openPDFViewer('10irrT5LevVMtBVbC5gF0owZ8G4GkQqtf', 'Introduction to Optical Mineralogy — Part 2')">
                   <h4>Introduction to Optical Mineralogy &amp; Minerals in Thin Sections — Part 2</h4>
-                  <p>Advanced concepts &amp; interference figures</p>
+                  <p>Minerals&amp; Its Identification</p>
                 </div>
               </div>
             </section>
@@ -697,98 +697,3 @@
 </body>
 </html>
 
-
-            <section id="gallery">
-  <h2>Fieldwork <span>Gallery</span></h2>
-  <p>Updating soon...</p>
-  <a href="#" class="cta-button" style="margin-top: 15px;">View Gallery</a>
-</section>
-
-
-            <section id="contact">
-  <h2>Get in <span>Touch</span></h2>
-  <p>Reach out to collaborate on a project or discuss the latest findings in Geology.</p>
-  <a href="mailto:heyfolks22@gmail.com" 
-     class="cta-button" 
-     style="margin-top: 15px;">
-     Email Me
-  </a>
-</section>
-</div>
-</main>
-
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const navLinks = document.querySelectorAll('.nav-menu a, .logo a');
-            const sections = document.querySelectorAll('section');
-            const learnMoreCta = document.querySelector('.learn-more-cta');
-            
-            // Function to hide all non-hero sections
-            const hideAllSections = () => {
-                sections.forEach(section => {
-                    if (section.id !== 'hero') {
-                        section.style.display = 'none';
-                    }
-                });
-            };
-
-            // Function to show a specific section
-            const showSection = (targetId) => {
-                hideAllSections();
-                const targetSection = document.getElementById(targetId);
-                if (targetSection) {
-                    targetSection.style.display = 'block';
-                    // Scroll to the top of the content wrapper to feel like a new page
-                    document.querySelector('.content-wrapper').scrollIntoView({ behavior: 'smooth' });
-                }
-            };
-
-            // Function to handle the navigation clicks
-            const handleNavClick = (event) => {
-                event.preventDefault(); // Stop the default anchor link behavior
-                
-                const targetId = event.currentTarget.getAttribute('data-target');
-                
-                // Remove 'active' class from all links
-                navLinks.forEach(link => link.classList.remove('active'));
-                
-                // Add 'active' class to the clicked link
-                event.currentTarget.classList.add('active');
-
-                if (targetId === 'hero') {
-                    // Clicking HOME/Logo: Hide all other sections and scroll to top of hero
-                    hideAllSections();
-                    document.getElementById('hero').scrollIntoView({ behavior: 'smooth' });
-                } else {
-                    // Clicking any other link: Show that specific section
-                    showSection(targetId);
-                }
-            };
-
-            // 1. Initial setup: Hide all non-hero sections
-            hideAllSections();
-            
-            // 2. Attach click listeners to all navigation links (including logo)
-            navLinks.forEach(link => {
-                // We use a custom data-target attribute in the HTML for reliable targeting
-                link.addEventListener('click', handleNavClick);
-            });
-
-            // 3. Special handler for the 'Learn More About Me' CTA
-            learnMoreCta.addEventListener('click', (event) => {
-                event.preventDefault(); // Prevent default scroll
-                
-                // Clear active state on all nav links
-                navLinks.forEach(link => link.classList.remove('active'));
-                
-                // Set 'About' link as active
-                document.querySelector('[data-target="about"]').classList.add('active');
-
-                // Show ONLY the 'about' section
-                showSection('about'); 
-            });
-        });
-    </script>
-</body>
-</html>
