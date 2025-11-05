@@ -353,7 +353,113 @@
             .pdf-modal-content { width: 100%; height: 100%; border-radius: 0; }
             .pdf-modal-actions a { padding: 8px 10px; font-size: 0.9rem; }
         }
+/* --- NAVIGATION --- */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--color-dark);
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 8%;
+            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.7);
+        }
 
+        .logo a {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            text-decoration: none;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 101;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: var(--color-light);
+            text-decoration: none;
+            margin-left: 35px;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover, .nav-menu a.active {
+            color: var(--color-primary);
+        }
+
+        /* Hamburger Menu Icon */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            z-index: 101;
+            padding: 4px;
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background: var(--color-light);
+            margin: 4px 0;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+            background: var(--color-primary);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
+            background: var(--color-primary);
+        }
+
+        /* Mobile Menu Styles */
+        @media (max-width: 968px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background: rgba(10, 10, 10, 0.98);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: right 0.4s ease;
+                box-shadow: -5px 0 25px rgba(0, 0, 0, 0.5);
+                backdrop-filter: blur(10px);
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .nav-menu a {
+                margin: 20px 0;
+                font-size: 1.1rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -365,19 +471,25 @@
         <source src="background.mp4" type="video/mp4"></video>
     </div>
 
-    <header class="header">
-        <div class="logo"><a href="#hero" class="nav-link" data-target="hero">The Petrologist</a></div>
-        <nav class="nav-menu">
-            <a href="#hero" class="nav-link active" data-target="hero">Home</a>
-            <a href="#about" class="nav-link" data-target="about">About</a>
-            <a href="#field-experience" class="nav-link" data-target="field-experience">Field Experience</a>
-            <a href="#internships" class="nav-link" data-target="internships">Internships</a>
-            <a href="#notes" class="nav-link" data-target="notes">Notes</a>
-            <a href="#gallery" class="nav-link" data-target="gallery">Gallery</a>
-            <a href="#contact" class="nav-link" data-target="contact">Contact</a>
-        </nav>
-    </header>
-
+   <header class="header">
+    <div class="logo"><a href="#hero" class="nav-link" data-target="hero">The Petrologist</a></div>
+    
+    <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    
+    <nav class="nav-menu">
+        <a href="#hero" class="nav-link active" data-target="hero">Home</a>
+        <a href="#about" class="nav-link" data-target="about">About</a>
+        <a href="#field-experience" class="nav-link" data-target="field-experience">Field Experience</a>
+        <a href="#internships" class="nav-link" data-target="internships">Internships</a>
+        <a href="#notes" class="nav-link" data-target="notes">Notes</a>
+        <a href="#gallery" class="nav-link" data-target="gallery">Gallery</a>
+        <a href="#contact" class="nav-link" data-target="contact">Contact</a>
+    </nav>
+</header>
     <main>
         <div class="content-wrapper">
 
@@ -700,6 +812,23 @@
             closePDFViewer();
           }
         });
+
+        // Hamburger Menu Toggle
+const hamburger = document.querySelector('.hamburger');
+const navMenu = document.querySelector('.nav-menu');
+
+hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    navMenu.classList.toggle('active');
+});
+
+// Close menu when clicking on a nav link
+document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+    });
+});
     </script>
 </body>
 </html>
