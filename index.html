@@ -50,7 +50,9 @@
             /* Subtle animation to suggest heat or internal movement */
             animation: magma-pulse 30s ease-in-out infinite alternate;
         }
-
+.magma-background video{
+  width:100%;
+}
         @keyframes magma-pulse {
             0% { opacity: 0.9; }
             100% { opacity: 1; }
@@ -355,10 +357,13 @@
     </style>
 </head>
 <body>
-    <video autoplay muted loop id="bg-video">
-        <source src="background.mp4" type="video/mp4"></video>
+    
 
-    <div class="magma-background"></div>
+    <div class="magma-background">
+
+<video autoplay muted loop id="bg-video">
+        <source src="background.mp4" type="video/mp4"></video>
+    </div>
 
     <header class="header">
         <div class="logo"><a href="#hero" class="nav-link" data-target="hero">The Petrologist</a></div>
